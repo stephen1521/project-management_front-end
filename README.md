@@ -1,4 +1,4 @@
-# project-management_front-end
+# Project-management
 
 A Basic Project Management Application that allows you to create a project with a team and manage individual tasks assigned to the team. 
 
