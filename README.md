@@ -22,8 +22,7 @@ A Basic Project Management Application that allows you to create a project with 
   - Edit Task
   - Comment on Task
   - Delete a Task
-  - Members assigned to task
-  - 
+  - View members assigned to task 
   
 ## Roles
 
