@@ -1,0 +1,45 @@
+#outer-container {
+    display: flex;
+    justify-content: center;
+    align-items: items center;
+    margin-top: 10%;
+}
+
+#inner-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: black solid 1px;
+    height: 400px;
+    width: 400px;
+}
+
+#input-div {
+    border: black solid 2px;
+}
+
+#login-header {
+    margin-bottom: 10%;
+}
+
+#link {
+    margin-top: 20%;
+}
+
+.outer-divs {
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.images {
+    height: 300px;
+    width: 300px;
+}
+
+.outer-inner-divs {
+    align-self: flex-end;
+}

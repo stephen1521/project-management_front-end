@@ -4,6 +4,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import axios from 'axios';
 import Layout from './layouts/Layout';
 import LandingPage from './pages/LandingPage';
+import RegistrationPage from './pages/RegistrationPage';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
 
 function App() {
 	const router = createBrowserRouter([
@@ -15,6 +18,18 @@ function App() {
 					index: true,
 					element: <LandingPage />
 				},
+				{
+					path: 'login',
+					element: <LoginPage />
+				},
+				{
+					path: 'registration',
+					element: <RegistrationPage />
+				},
+				{
+					path: 'homepage',
+					element: <HomePage />
+				}
 			]
 		}
 	])
