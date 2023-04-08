@@ -3,6 +3,8 @@ import { useAuth } from "../hooks/Auth";
 import { useNavigate } from "react-router-dom";
 
 const RegistrationPage = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [registerMessage, setRegisterMessage] = useState("");
@@ -21,6 +23,18 @@ const RegistrationPage = () => {
                     {registerMessage}
                 </div>}
                 <div className="input-div">
+                <div className="input-group mb-3">
+                        <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter First Name"
+                            onChange={(e) => {
+                                setFirstName(e.target.value);
+                        }}/>
+                    </div>
+                    <div className="input-group mb-3">
+                        <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter Last Name"
+                            onChange={(e) => {
+                                setLastName(e.target.value);
+                        }}/>
+                    </div>
                     <div className="input-group mb-3">
                         <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter Email"
                             onChange={(e) => {
@@ -37,7 +51,7 @@ const RegistrationPage = () => {
                 <div className="d-grid gap-2 col-6 mx-auto">
                     <button className="btn btn-primary"
                         onClick={async () => {
-                                const registerResult = await auth.register(email, password);
+                                const registerResult = await auth.register(email, password, firstName, lastName);
                                 if(registerResult.success) {
                          			navigate("/login");
                                 }
