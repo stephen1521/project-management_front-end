@@ -1,0 +1,27 @@
+#create-project-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.714);
+}
+
+#create-project-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-emphasis: center;
+    flex-flow: column nowrap;
+    height: 80%;
+    width: 35%;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.input-div {
+    margin-top: 10px;
+}

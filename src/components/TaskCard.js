@@ -5,7 +5,7 @@ const TaskCard = () => {
             <div className="card-header">
                 Title
             </div>
-            <div class="card-body">
+            <div className="card-body">
                 Assigned to
             </div>
         </div>

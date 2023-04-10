@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import CreateProjectPage from './pages/CreateProjectPage';
 
 function App() {
 	const router = createBrowserRouter([
@@ -28,7 +29,17 @@ function App() {
 				},
 				{
 					path: 'homepage',
-					element: <HomePage />
+					element: <HomePage />,
+					children: [
+						{
+							path: 'createProject',
+							element: <CreateProjectPage />
+						},
+						{
+							path:'/homepage/:projectName',
+							element: <HomePage />
+						}
+					]
 				}
 			]
 		}
