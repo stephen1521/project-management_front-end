@@ -4,19 +4,21 @@ import { useAuth } from "../hooks/Auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useMemo, useContext } from "react";
 import TaskCard from '../components/TaskCard';
-import CreateProjectPage from './CreateProjectPage';
+import CreateProject from '../components/CreateProject';
+import CreateTask from '../components/CreateTask';
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const HomePage = () => {
     const [currentUserProjects, setCurrentUserProjects] = useState(null);
     const [currentUser, setCurrentUser] = useState('');
     const [projectIsBeingCreated, setProjectIsBeingCreated] = useState(false);
+    const [taskIsBeingCreated, setTaskIsBeingCreated] = useState(false);
     const [dashboardUrl, setDashboardUrl] = useState('/homepage');
     const [users, setUsers] = useState('');
     const [projects, setProjects] = useState('');
     const auth = useAuth();
     const navigate = useNavigate();
-
+    
     const createProject = (projectName, description, date, assignedUsers) => {
         setProjectIsBeingCreated(true);
         setDashboardUrl(`/homepage/${projectName}`);
@@ -40,6 +42,28 @@ const HomePage = () => {
         }
         setProjectIsBeingCreated(false);
     }
+   
+    const createTask = (taskName, description, date, assignedUsers) => {
+        setTaskIsBeingCreated(true);
+        const req = {
+            taskName: taskName,
+            description: description,
+            dueDate: date,
+            assignedUsers: assignedUsers
+        }
+        const headers = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        try {
+            axios.post(`${urlEndPoint}/projects/createTask/${currentUserProjects[0]._id}/${currentUser._id}`, req , {headers:headers})
+                .then(res => {
+                    console.log(res);
+                })
+        } catch (e) {
+            console.log(e);
+        }
+        setTaskIsBeingCreated(false)
+    }
 
     const getUsers = () => {
         try {
@@ -56,13 +80,15 @@ const HomePage = () => {
                                 .then(res => {
                                     if(res.data.userProjects[0] !== undefined){
                                         setCurrentUserProjects(res.data.userProjects);
+                                        setDashboardUrl(`/homepage/${res.data.userProjects[0].projectName}`);
+                                        navigate(`/homepage/${res.data.userProjects[0].projectName}`);
                                     }
                         })
                         }
                     }
                 })
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
 
@@ -78,8 +104,10 @@ const HomePage = () => {
                 navigate('/homepage/createProject');
                 setProjectIsBeingCreated(true);
                 }} id='create-project' className='nav-link' href='/homepage/createProject'>Create Project</a>}
-            {projectIsBeingCreated && <CreateProjectPage 
+            {projectIsBeingCreated && <CreateProject 
                                             createProject={createProject}/>}
+            {taskIsBeingCreated && <CreateTask 
+                                            createTask={createTask}/>}
             <ul id='navbar' className="nav nav-tabs justify-content-end">
                 <li className="nav-item">
                     <a className="nav-link " aria-current="page" onClick={() => navigate(dashboardUrl)}>Dashboard</a>
@@ -88,7 +116,11 @@ const HomePage = () => {
                     <a className="nav-link" href="#">My Tasks</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Create Task</a>
+                    <a className="nav-link" onClick={(e) => {
+                        e.preventDefault();
+                        navigate('/homepage/createTask');
+                        setTaskIsBeingCreated(true);
+                    }}>Create Task</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="#">Profile</a>

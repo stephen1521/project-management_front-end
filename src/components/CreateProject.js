@@ -1,4 +1,4 @@
-import './CreateProjectPage.css';
+import './CreateProject.css';
 import { useState, useEffect } from "react";
 
 const CreateProjectPage = (props) => {

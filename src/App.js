@@ -7,7 +7,8 @@ import LandingPage from './pages/LandingPage';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
-import CreateProjectPage from './pages/CreateProjectPage';
+import CreateProject from './components/CreateProject';
+import CreateTask from './components/CreateTask';
 
 function App() {
 	const router = createBrowserRouter([
@@ -33,11 +34,15 @@ function App() {
 					children: [
 						{
 							path: 'createProject',
-							element: <CreateProjectPage />
+							element: <CreateProject />
 						},
 						{
 							path:'/homepage/:projectName',
 							element: <HomePage />
+						},
+						{
+							path:'/homepage/createTask',
+							element: <CreateTask />
 						}
 					]
 				}
