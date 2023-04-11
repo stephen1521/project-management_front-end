@@ -8,7 +8,7 @@
     height: 95vh;
 }
 
-#card-container {
+.card-container {
     display: flex;
     flex-flow: column nowrap;
     width: 20%;

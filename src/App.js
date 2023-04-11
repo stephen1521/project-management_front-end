@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import CreateProject from './components/CreateProject';
 import CreateTask from './components/CreateTask';
+import TaskPage from './pages/TaskPage';
 
 function App() {
 	const router = createBrowserRouter([
@@ -43,6 +44,10 @@ function App() {
 						{
 							path:'/homepage/createTask',
 							element: <CreateTask />
+						},
+						{
+							path: '/homepage/task/:taskName',
+							element: <TaskPage />
 						}
 					]
 				}
