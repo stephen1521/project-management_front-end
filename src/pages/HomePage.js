@@ -117,7 +117,7 @@ const HomePage = () => {
                                                 if(res.data.userProjects[i].task[j].status === 'in-review'){
                                                     inReview.push(res.data.userProjects[i].task[j]);
                                                 }
-                                                if(res.data.userProjects[i].task[j].status === 'complete'){
+                                                if(res.data.userProjects[i].task[j].status === 'completed'){
                                                     complete.push(res.data.userProjects[i].task[j]);
                                                 }
                                             }
@@ -145,8 +145,8 @@ const HomePage = () => {
 
     if(dataLoading) {
         return (
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
             </div>
         )
     } else {
@@ -162,7 +162,8 @@ const HomePage = () => {
                                             createProject={createProject}/>}
             {taskIsBeingCreated && <CreateTask 
                                             createTask={createTask}/>}
-            {viewingTask && <TaskPage task={viewingTaskInfo} viewTask={viewTask2} users={users} />}
+            {viewingTask && <TaskPage 
+                                    task={viewingTaskInfo} viewTask={viewTask2} users={users} currentUserProjects={currentUserProjects} />}
             <ul id='navbar' className="nav nav-tabs justify-content-end">
                 <li className="nav-item">
                     <a className="nav-link " aria-current="page" onClick={() => navigate(dashboardUrl)}>Dashboard</a>
@@ -199,7 +200,7 @@ const HomePage = () => {
                         <p className="h4">In-progress</p>
                     </div>
                     <div className='cards'>
-                        <TaskCard tasks={inProgress} users={users}/>
+                        <TaskCard tasks={inProgress} users={users} viewTask={viewTask}/>
                     </div>
                 </div>
                 <div className='card-container shadow-lg mb-5 bg-white rounded'>
