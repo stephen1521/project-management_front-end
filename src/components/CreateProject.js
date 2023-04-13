@@ -2,7 +2,7 @@ import './CreateProject.css';
 import { useState, useEffect } from "react";
 
 const CreateProjectPage = (props) => {
-    const { createProject } = props;
+    const { createProject, goBackProject } = props;
     const [projectName, setProjectName] = useState('');
     const [description, setDescription] = useState('');
     const [date, setDate] = useState('');
@@ -10,6 +10,7 @@ const CreateProjectPage = (props) => {
     return (
         <div id="create-project-container">
             <div id='create-project-page'>
+                <a className='backX' onClick={e => goBackProject()}>X</a>
                 <h1>Create Project</h1>
                 <div className='input-div'>
                     <div className="input-group mb-3">

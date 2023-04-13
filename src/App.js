@@ -1,7 +1,7 @@
+import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useEffect } from 'react';
+import "@popperjs/core";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import axios from 'axios';
 import Layout from './layouts/Layout';
 import LandingPage from './pages/LandingPage';
 import RegistrationPage from './pages/RegistrationPage';

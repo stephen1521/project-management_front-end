@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
@@ -15,7 +14,7 @@ const Card = (props) => {
 
     return (
         <div className="card" style={{width: '95%', marginTop: '10px', position: 'static'}}>
-            <div onClick={() => {
+            <div id="taskHeader" onClick={() => {
                     navigate(`/homepage/task/${task.taskName}`)
                     viewTask(task);
                 }

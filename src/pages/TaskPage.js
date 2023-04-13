@@ -5,7 +5,7 @@ const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 const Task = (props) => {
     const [isEditing, setIsEditing] = useState(false);
-    const {task, viewTask, users, currentUserProjects} = props;
+    const {task, viewTask, users, currentProject} = props;
     const [selectedOption, setSelectedOption] = useState(task.status);
     const [taskName, setTaskName] = useState(task.taskName);
     const [description, setDescription] = useState(task.description);
@@ -37,7 +37,7 @@ const Task = (props) => {
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-        await axios.put(`${urlEndPoint}/projects/updateTask/${currentUserProjects[0]._id}/${task._id}`, req, {headers:headers})
+        await axios.put(`${urlEndPoint}/projects/updateTask/${currentProject._id}/${task._id}`, req, {headers:headers})
             .then(function (response){
                 console.log(response);
                 window.location.reload();
@@ -50,7 +50,7 @@ const Task = (props) => {
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-        await axios.delete(`${urlEndPoint}/projects/deleteTask/${currentUserProjects[0]._id}/${task._id}`, {headers:headers})
+        await axios.delete(`${urlEndPoint}/projects/deleteTask/${currentProject._id}/${task._id}`, {headers:headers})
             .then(function (response){
                 console.log(response);
                 window.location.reload();

@@ -16,7 +16,7 @@
     text-emphasis: center;
     flex-flow: column nowrap;
     height: 80%;
-    width: 35%;
+    width: 50%;
     border: 1px solid black;
     background-color: white;
     border-radius: 15px;
@@ -24,4 +24,14 @@
 
 .input-div {
     margin-top: 10px;
+}
+
+.backX {
+    position: absolute;
+    height: 79%;
+    right: 26%;
+}
+
+.backX:hover {
+    cursor: pointer;
 }

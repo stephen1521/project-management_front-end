@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 
 const CreateTask = (props) => {
-    const { createTask } = props;
+    const { createTask, goBackTask } = props;
     const [taskName, setTaskName] = useState('');
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState('');
@@ -12,6 +12,7 @@ const CreateTask = (props) => {
         <div id="create-project-container">
         <div id='create-project-page'>
             <h1>Create Task</h1>
+            <a className='backX' onClick={e => goBackTask()}>X</a>
             <div className='input-div'>
                 <div className="input-group mb-3">
                     <input type="text" className="form-control" aria-describedby="inputGroup-sizing-default" placeholder="Enter Task Name"

@@ -24,6 +24,7 @@ const HomePage = () => {
     const [viewingTask, setViewingTask] = useState(false);
     const [viewingTaskInfo, setViewingTaskInfo] = useState('');
     const [dataLoading, setDataLoading] = useState(true);
+    const [currentProject, setCurrentProject] = useState('');
     const auth = useAuth();
     const navigate = useNavigate();
 
@@ -38,6 +39,14 @@ const HomePage = () => {
         navigate(dashboardUrl);
     }
     
+    const goBackProject = () => {
+        setProjectIsBeingCreated(false);
+    }
+
+    const goBackTask = () => {
+        setTaskIsBeingCreated(false);
+    }
+
     const createProject = (projectName, description, date, assignedUsers) => {
         setProjectIsBeingCreated(true);
         setDashboardUrl(`/homepage/${projectName}`);
@@ -74,7 +83,7 @@ const HomePage = () => {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
         try {
-            axios.post(`${urlEndPoint}/projects/createTask/${currentUserProjects[0]._id}/${currentUser._id}`, req , {headers:headers})
+            axios.post(`${urlEndPoint}/projects/createTask/${currentProject._id}/${currentUser._id}`, req , {headers:headers})
                 .then(res => {
                     console.log(res);
                     window.location.reload();
@@ -102,26 +111,25 @@ const HomePage = () => {
                                     if(res.data.userProjects[0] !== undefined){
                                         setCurrentUserProjects(res.data.userProjects);
                                         setCurrentProjetTasks(res.data.userProjects[0].task);
+                                        setCurrentProject(res.data.userProjects[0])
                                         const todo = [];
                                         const inProgress = [];
                                         const inReview = [];
                                         const complete = [];
-                                        for(let i = 0; i < res.data.userProjects.length; i++){
-                                            for(let j = 0; j < res.data.userProjects[i].task.length; j++){
-                                                if(res.data.userProjects[i].task[j].status === 'not-started'){
-                                                    todo.push(res.data.userProjects[i].task[j]);
+                                            for(let j = 0; j < res.data.userProjects[0].task.length; j++){
+                                                if(res.data.userProjects[0].task[j].status === 'not-started'){
+                                                    todo.push(res.data.userProjects[0].task[j]);
                                                 }
-                                                if(res.data.userProjects[i].task[j].status === 'in-progress'){
-                                                    inProgress.push(res.data.userProjects[i].task[j]);
+                                                if(res.data.userProjects[0].task[j].status === 'in-progress'){
+                                                    inProgress.push(res.data.userProjects[0].task[j]);
                                                 }
-                                                if(res.data.userProjects[i].task[j].status === 'in-review'){
-                                                    inReview.push(res.data.userProjects[i].task[j]);
+                                                if(res.data.userProjects[0].task[j].status === 'in-review'){
+                                                    inReview.push(res.data.userProjects[0].task[j]);
                                                 }
-                                                if(res.data.userProjects[i].task[j].status === 'completed'){
-                                                    complete.push(res.data.userProjects[i].task[j]);
+                                                if(res.data.userProjects[0].task[j].status === 'completed'){
+                                                    complete.push(res.data.userProjects[0].task[j]);
                                                 }
                                             }
-                                        }
                                         setTodoTask(todo);
                                         setInProgress(inProgress);
                                         setInReview(inReview);
@@ -139,6 +147,35 @@ const HomePage = () => {
         }
     }
 
+    const handleProjectChange = (project) => {
+        setCurrentProject(project);
+        setCurrentProjetTasks(project.task);
+        const todo = [];
+        const inProgress = [];
+        const inReview = [];
+        const complete = [];
+            for(let j = 0; j < project.task.length; j++){
+                if(project.task[j].status === 'not-started'){
+                    todo.push(project.task[j]);
+                }
+                if(project.task[j].status === 'in-progress'){
+                    inProgress.push(project.task[j]);
+                }
+                if(project.task[j].status === 'in-review'){
+                    inReview.push(project.task[j]);
+                }
+                if(project.task[j].status === 'completed'){
+                    complete.push(project.task[j]);
+                }
+            }
+        setTodoTask(todo);
+        setInProgress(inProgress);
+        setInReview(inReview);
+        setComplete(complete);
+        setDashboardUrl(`/homepage/${project.projectName}`);
+        navigate(`/homepage/${project.projectName}`);
+    }
+
     useEffect(() => {
         getUsers();
     }, [dataLoading])
@@ -152,18 +189,35 @@ const HomePage = () => {
     } else {
     return (
         <div>
-            {currentUserProjects !== null && <h3 id='project'>{'Project: ' + currentUserProjects[0].projectName}</h3>}
-            {currentUserProjects === null && <a onClick={(e) => {
+            {currentUserProjects !== null && <div id='project' className="dropdown">
+                <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Project: {currentProject.projectName}
+                </button>
+                <ul className="dropdown-menu">
+                    {currentUserProjects.map((project, index) => {
+                        if(currentProject.projectName === project.projectName){
+                            return;
+                        }
+                        return <li key={index}><a onClick={e => handleProjectChange(project)} className='dropdown-item'>{project.projectName}</a></li>
+                    })}
+                    <li><a className="dropdown-item" onClick={e => {
+                        e.preventDefault();
+                        navigate('/homepage/createProject');
+                        setProjectIsBeingCreated(true);
+                    }} href='/homepage/createProject'>Create Project</a></li>
+                </ul>
+            </div>}
+            {currentUserProjects === null && <a onClick={e => {
                 e.preventDefault();
                 navigate('/homepage/createProject');
                 setProjectIsBeingCreated(true);
-                }} id='create-project' className='nav-link' href='/homepage/createProject'>Create Project</a>}
+            }} id='create-project' className='nav-link' href='/homepage/createProject'>Create Project</a>}
             {projectIsBeingCreated && <CreateProject 
-                                            createProject={createProject}/>}
+                                            createProject={createProject} goBackProject={goBackProject}/>}
             {taskIsBeingCreated && <CreateTask 
-                                            createTask={createTask}/>}
+                                            createTask={createTask} goBackTask={goBackTask}/>}
             {viewingTask && <TaskPage 
-                                    task={viewingTaskInfo} viewTask={viewTask2} users={users} currentUserProjects={currentUserProjects} />}
+                                    task={viewingTaskInfo} viewTask={viewTask2} users={users} currentProject={currentProject} />}
             <ul id='navbar' className="nav nav-tabs justify-content-end">
                 <li className="nav-item">
                     <a className="nav-link " aria-current="page" onClick={() => navigate(dashboardUrl)}>Dashboard</a>

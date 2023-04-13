@@ -49,8 +49,8 @@ a {
 
 #project {
     position: fixed;
-    left: 5px;
-    top: 5px;
+    left: 1px;
+    top: 1px;
 }
 
 #create-project {
@@ -67,4 +67,8 @@ a {
 #create-project:hover {
     background-color: gray;
     color: white !important;
+}
+
+#taskHeader:hover {
+    cursor: pointer;
 }
