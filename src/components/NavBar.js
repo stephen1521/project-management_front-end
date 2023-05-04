@@ -4,7 +4,7 @@ const NavBar = () => {
     return (
         <nav className="navbar fixed-top bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Project Management</a>
+                <a className="navbar-brand" href="#">Lorum Ipsum</a>
                 <div id="navbarText">
                     <ul className="nav">
                         <li className="nav-item">

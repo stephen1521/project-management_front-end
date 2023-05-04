@@ -12,8 +12,8 @@ const LandingPage = () => {
             <div id="bg" style={{backgroundImage: "url(/landingPageBg.jpg)" }}>
                 <div id='Container'>
                     <div id='message' className='Container-Child'>
-                        <h1 className='text'>Bring all your teammates and tasks together.</h1>
-                        <h5 className='text'>Keep everything together even if your team isn't.</h5>
+                        <h1 className='text'>Lorem ipsum dolor sit amet</h1>
+                        <h5 className='text'>Ut enim ad minim veniam, quis nostrud exercitation ullamco</h5>
                         <button id="button"className='btn btn-primary btn-lg' onClick={() => navigate('/registration')}>Sign Up-Today</button>
                     </div>
                     <div className='Container-Child'>
