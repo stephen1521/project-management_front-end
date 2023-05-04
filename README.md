@@ -4,25 +4,25 @@ A Basic Project Management Application that allows you to create a project with 
 
 ## User
 
-- User Authentication
-- Login/Logout
-- Register new account
+- User Authentication (Done)
+- Login/Logout (Done)
+- Register new account (Done)
 - Alerts for task updates/assignment/deletion/comments
-- View project dashboard
+- View project dashboard (Done)
   - Filter projects tasks
-- View single task
+- View single task (Done)
 
 ## Project
 
-- Create Project
-- Create Task
+- Create Project (Done)
+- Create Task (Done)
   
 - Task
-  - Set/Edit Status
-  - Edit Task
+  - Set/Edit Status (Done)
+  - Edit Task (Done)
   - Comment on Task
-  - Delete a Task
-  - View members assigned to task 
+  - Delete a Task (Done)
+  - View members assigned to task (Done)
   
 ## Roles
 
