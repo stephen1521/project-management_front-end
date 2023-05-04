@@ -222,9 +222,9 @@ const HomePage = () => {
                 <li className="nav-item">
                     <a className="nav-link " aria-current="page" onClick={() => navigate(dashboardUrl)}>Dashboard</a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="#">My Tasks</a>
-                </li>
+                </li> */}
                 <li className="nav-item">
                     <a className="nav-link" onClick={(e) => {
                         e.preventDefault();
@@ -232,9 +232,9 @@ const HomePage = () => {
                         setTaskIsBeingCreated(true);
                     }}>Create Task</a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="#">Profile</a>
-                </li>
+                </li> */}
                 <button className="btn btn-outline-secondary" type="submit" 
                     onClick={()=> {
                         auth.logout()

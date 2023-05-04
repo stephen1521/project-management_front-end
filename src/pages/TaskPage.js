@@ -132,7 +132,6 @@ const Task = (props) => {
                                                                         setIsEditing(false);
                                                                     }}>Submit</button>
                         <button className="btn btn-secondary" onClick={() => {
-                                                                        handleDeleteTask();
                                                                         setIsEditing(false);    
                                                                     }}>Back</button>
                     </div>
